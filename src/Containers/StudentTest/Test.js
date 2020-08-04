@@ -1,50 +1,18 @@
 
 import React,{Component} from 'react';
-import {Prompt} from 'react-router';
+// import {Prompt} from 'react-router';
 import classes from './Test.module.css';
 // import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import QuestionNavigation from '../../Components/StudentTest/QuestionNavigation';
-// import firebase from 'firebase';
+import firebase from '../../Firebase/Firebase';
 import {message} from 'antd';
 import 'antd/es/message/style/css';
 
-// const uiConfig = {
-//     callbacks: {
-//       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-//         var user = authResult.user;
-//         var credential = authResult.credential;
-//         var isNewUser = authResult.additionalUserInfo.isNewUser;
-//         var providerId = authResult.additionalUserInfo.providerId;
-//         var operationType = authResult.operationType;
-//         // Do something with the returned AuthResult.
-//         // Return type determines whether we continue the redirect automatically
-//         // or whether we leave that to developer to handle.
-//         return true;
-//       },
-//       signInFailure: function(error) {
-//         // Some unrecoverable error occurred during sign-in.
-//         // Return a promise when error handling is completed and FirebaseUI
-//         // will reset, clearing any UI. This commonly occurs for error code
-//         // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
-//         // occurs. Check below for more details on this.
-//         // return handleUIError(error);
-//       },
-  
-//     },
-//     queryParameterForSignInSuccessUrl: 'signInSuccessUrl',
-//     signInFlow:'popup',
-//     signInSuccessUrl: '',//Specifying sign in success url can cause double redirect since we are also managing redirect in react-router with local state.
-//     signInOptions: [
-//       firebase.auth.EmailAuthProvider.PROVIDER_ID,
-//       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-//     ],
-//     // Other config options...
-//   }
 
 
 class Test extends Component{
     state={
+        loading:true,
         questions:[],
         answers:{
           0:""
@@ -60,25 +28,19 @@ class Test extends Component{
 
 
 componentWillMount(){
-        firebase.auth().onAuthStateChanged((user)  =>{
-          if (user) {
-          this.loadtest()
-          } else {
-         // No user is signed in.
-          }
-        }); 
-      }
+  this.loadtest(); 
+  }
 
 
 // Loads the test if user is authenticated esle rdirect to signin screen.
 loadtest=()=>{
-let testRef = firebase.firestore().collection('partners').doc('ARDd6qkwc6ewoGLmxzCrh0uS55p2').collection('tests').doc('8MifMe3R1UmGzi3O35Wu').collection('test');
+let testRef = firebase.firestore().collection('test');
     let ResTestRef = testRef.get()   
     .then(snapshot => {
       snapshot.forEach(doc => {
         console.log(doc.id, '=>', doc.data());
         let l = doc.data().paper.length;
-        this.setState({questions:doc.data().paper,currentquestion:doc.data().paper[0],qnac:l,qnvc:l-1});
+        this.setState({questions:doc.data().paper,currentquestion:doc.data().paper[0],qnac:l,qnvc:l-1,loading:false});
       });
     })
     .catch(err => {
@@ -94,10 +56,12 @@ handleOptionChange = changeEvent => {
   };
 
 
-// Saves answers to the local state. takes curent selected option in state and current question index in state as arguments. Calls "nextQuestion" function in the end.
+// Saves answers to the local state. takes curent selected option in state and current question index in state as arguments.
+// Calls "nextQuestion" function in the end.
+// Arguments include selectedOption and currentQuestionIndex
 saveAnswer=(sOption,cInd)=>{
   let i = this.state.answers[cInd];
-  
+  console.log('executed')
   //  If user clicks on "Save and Next" without selecting an option. we return the user without executing rest of the function.
   if(sOption===""){
     message.warn("Please select an answer !");
@@ -110,12 +74,15 @@ saveAnswer=(sOption,cInd)=>{
  
   //  If user clicks on "Save and Next" and question is marked for review already. we adjust the state for qirc before executing rest of the function.
   if(i==="mrkfrrevw7"){
-    this.setState(prevState=>({qac:++prevState.qac,qirc:--prevState.qirc,qnac:--prevState.qnac}));
+    this.setState(prevState=>({qac:prevState.qac+1,qirc:prevState.qirc-1,qnac:prevState.qnac-1}));
   }
 
   //  If user clicks on "Save and Next" and there is NO previous answer to it. We adjust qac and qnac in addition we set the current selected option as answer in answers array.
   if(i===""){
-    this.setState(prevState=>({qnac:--prevState.qnac,qac:++prevState.qac, answers:{...this.state.answers,[cInd]:sOption}}));
+    
+    this.setState(prevState=>{
+      return ({ qnac: prevState.qnac-1, qac: prevState.qac+1, answers: { ...this.state.answers, [cInd]: sOption } });
+    });
   }
 
   //  If user clicks on "Save and Next" and there IS previous answer to it. We set the current selected option as answer in answers array.
@@ -137,10 +104,10 @@ clearAnswer=(sOption,cIndex)=>{
     return;
   }
  if(i==="mrkfrrevw7"){
-  this.setState(prevState=>({selectedOption:"",qirc:--prevState.qirc,answers:{...this.state.answers,[cIndex]:""}}));
+  this.setState(prevState=>({selectedOption:"",qirc:prevState.qirc-1,answers:{...this.state.answers,[cIndex]:""}}));
  }
   else if(typeof i==="string"){
-    this.setState(prevState=>({selectedOption:"",qnac:++prevState.qnac,qac:--prevState.qac,answers:{...this.state.answers,[cIndex]:""}}));
+    this.setState(prevState=>({selectedOption:"",qnac:prevState.qnac+1,qac:prevState.qac-1,answers:{...this.state.answers,[cIndex]:""}}));
   }
 }
 
@@ -151,9 +118,9 @@ markForReview=(cIndex)=>{
     return;
   }
   if( typeof i === "string" && i !== "mrkfrrevw7" && i !==""){
-    this.setState(prevState=>({qac:--prevState.qac,qnac:++prevState.qnac}));
+    this.setState(prevState=>({qac:prevState.qac-1,qnac:prevState.qnac+1}));
   }
-  this.setState(prevState=>({selectedOption:"mrkfrrevw7",qirc:++prevState.qirc,answers:{...this.state.answers,[cIndex]:"mrkfrrevw7"}}));
+  this.setState(prevState=>({selectedOption:"mrkfrrevw7",qirc:prevState.qirc+1,answers:{...this.state.answers,[cIndex]:"mrkfrrevw7"}}));
   this.nextQuestion(cIndex);
 }
 
@@ -165,7 +132,7 @@ nextQuestion=(cInd)=>{
     return;
   }
   if(this.state.answers[i+1]===undefined){
-    this.setState(prevState=>({qnvc:--prevState.qnvc, answers:{...prevState.answers,[i+1]:""}}))
+    this.setState(prevState=>({qnvc:prevState.qnvc-1, answers:{...prevState.answers,[i+1]:""}}))
   }else{
     this.setState({selectedOption:this.state.answers[i+1]})
   }
@@ -179,7 +146,7 @@ previousQuestion=()=>{
   }
   this.setState({currentquestion:this.state.questions[i-1],currentquestionindex:i-1});
   if(this.state.answers[i-1]===undefined){
-    this.setState(prevState=>({qnvc:--prevState.qnvc,answers:{...this.state.answers,[i-1]:""}}));
+    this.setState(prevState=>({qnvc:prevState.qnvc-1,answers:{...this.state.answers,[i-1]:""}}));
   }else{
     this.setState({selectedOption:this.state.answers[i-1]})
   }
@@ -191,7 +158,7 @@ navigationClick=(e,i)=>{
   console.log("answertype "+typeof this.state.answers[i]);
   // typeof this.state.answers[i]==="string" || this.state.answers[i]===""
   if(this.state.answers[i]===undefined){
-    this.setState(prevState=>({qnvc:--prevState.qnvc,answers:{...this.state.answers,[i]:""}}))
+    this.setState(prevState=>({qnvc:prevState.qnvc-1,answers:{...this.state.answers,[i]:""}}))
   }
   if(this.state.answers[i]!=="mrkfrrevw7" || this.state.answers[i]!=="")
   {
@@ -202,16 +169,12 @@ navigationClick=(e,i)=>{
 render(){
 return(
 <div className={classes.contentwrapper}>
-<Prompt
+{/* <Prompt
       when={true}
       message='You have unsaved changes, are you sure you want to leave?'
-    />   
-{this.props.loading?<p>Loading..</p>:
-(!this.props.loggedin?
-<React.Fragment>
-    <p>Please sign in to see this page.</p>
-    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} className={classes.emailbox}/>
- </React.Fragment>:<React.Fragment>
+    />    */}
+{this.state.loading?<p>Loading..</p>:
+(<React.Fragment>
 <div className={classes.userinfobannerwrapper}>
     <div className={classes.userimage}>userimage</div>
     <div className={classes.userdetailsandtime} >user details and time left</div> 
