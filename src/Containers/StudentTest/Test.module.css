@@ -3,37 +3,51 @@
     align-self: center;
     grid-template-columns: repeat(16,1fr);
     grid-template-rows:auto;
+    
 }
 .userinfobannerwrapper{
     grid-column: auto/span 16;
 }
-.questionpaperandcontrolswrapper{
-    grid-column: 2/span 9;
 
+.questionpaperandcontrolswrapper{
+    grid-column: 2/span 9;   
 }
+
 .questionpaperview{
     display: flex;
     flex-direction: column;
-    border:black 1px solid;
+    background-color: white;
+    padding: 10px;
+    border:1px solid rgb(235, 237, 240);
+}
+
+.currentquestiontext{
+    text-align: start;
 }
 
 .hrline{
     height:2px;
     width: 100%;
-    background-color:black;
+    background-color:rgb(235, 237, 240);
 }
+
 .optionstext{
     align-self: flex-start;
-    font-weight: 700;
+}
+
+.questionpapercontrols{
+    margin-top: 10px;
 }
 
 .questionanswerinformationwrapper{
     grid-column: 12/span 4;
 }
+
 .questionanswercount{
     display: flex;
     flex-wrap: wrap;
-    border:black 1px solid;
+    background-color:white;
+    border:1px solid rgb(235, 237, 240);
 }
 .questionnotvisited{
     margin:10px;
@@ -47,21 +61,21 @@
     display: inline-block;
     width:25px;
     height:25px;
-    background-color: greenyellow;
+    background-color: #adff2f;
 }
 .questionnotanswered{
     margin:10px;
     display: inline-block;
     width:25px;
     height:25px;
-    background-color:red;
+    background-color:#ffa39e;
 }
 .questioninreview{
     margin:10px;
     display: inline-block;
     width:25px;
     height:25px;
-    background-color: lightcoral;
+    background-color: #d3adf7;
 }
 .aligncenter{
     display: flex;
@@ -69,15 +83,51 @@
     
 }
 
-
 .questionanswernavigation{
     display: flex;
     flex-wrap: wrap;
-    border:black 1px solid;
-    margin-top:5px;
     min-height: 200px;
     overflow-y: scroll;
+    background-color:white;
+    margin-top:5px;
+    padding:10px;
+    border:1px solid rgb(235, 237, 240);
+    justify-content: space-evenly;
 }
+
 .marginbottom{
     margin-bottom: 20px;
 }
+
+Button{
+    margin: 5px!important;/*Override antd*/
+}
+
+input{
+    margin-right: 7px;
+}
+
+/** Media Queries**/
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .questionpaperandcontrolswrapper{
+        grid-column: auto/span 16;   
+    }
+
+    .questionanswerinformationwrapper{
+        grid-column: 2/span 14;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {...} */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {...} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {...} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {...} */
