@@ -1,0 +1,83 @@
+.contentwrapper{
+    display: grid;
+    align-self: center;
+    grid-template-columns: repeat(16,1fr);
+    grid-template-rows:auto;
+}
+.userinfobannerwrapper{
+    grid-column: auto/span 16;
+}
+.questionpaperandcontrolswrapper{
+    grid-column: 2/span 9;
+
+}
+.questionpaperview{
+    display: flex;
+    flex-direction: column;
+    border:black 1px solid;
+}
+
+.hrline{
+    height:2px;
+    width: 100%;
+    background-color:black;
+}
+.optionstext{
+    align-self: flex-start;
+    font-weight: 700;
+}
+
+.questionanswerinformationwrapper{
+    grid-column: 12/span 4;
+}
+.questionanswercount{
+    display: flex;
+    flex-wrap: wrap;
+    border:black 1px solid;
+}
+.questionnotvisited{
+    margin:10px;
+    display: inline-block;
+    width:25px;
+    height:25px;
+    background-color: #eee;
+}
+.questionanswered{
+    margin:10px;
+    display: inline-block;
+    width:25px;
+    height:25px;
+    background-color: greenyellow;
+}
+.questionnotanswered{
+    margin:10px;
+    display: inline-block;
+    width:25px;
+    height:25px;
+    background-color:red;
+}
+.questioninreview{
+    margin:10px;
+    display: inline-block;
+    width:25px;
+    height:25px;
+    background-color: lightcoral;
+}
+.aligncenter{
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.questionanswernavigation{
+    display: flex;
+    flex-wrap: wrap;
+    border:black 1px solid;
+    margin-top:5px;
+    min-height: 200px;
+    overflow-y: scroll;
+}
+.marginbottom{
+    margin-bottom: 20px;
+}
