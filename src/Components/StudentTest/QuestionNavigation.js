@@ -4,7 +4,7 @@ const questionnavigation = (props) => {
     let color = '';
     let borderColor = '';
     if(props.ind === props.cqind){
-        borderColor = '2px solid rgba(0,0,0,0.85)'
+        borderColor = '1px solid black'
     }
 
     if (props.useranswer === "" || props.useranswer === null) { color = '#ffa39e' }
@@ -13,7 +13,7 @@ const questionnavigation = (props) => {
     else { color = '#adff2f' }
     return (
         <div onClick={props.click} style={{ backgroundColor: color, border: borderColor }} className={classes.questionnavigationboxes}>
-            <div>{props.ind + 1}</div>
+            <div className={classes.questionnavigationboxesnumber}>{props.ind + 1}</div>
         </div>
     );
 

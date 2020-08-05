@@ -8,6 +8,7 @@ import firebase from '../../Firebase/Firebase';
 import 'firebase/firestore'
 import { message } from 'antd';
 import { Button } from 'antd';
+import logo from '../../assets/logo.png'
 import {RightSquareOutlined,HistoryOutlined,UndoOutlined,RightOutlined,LeftOutlined,SaveOutlined} from '@ant-design/icons'
 import 'antd/es/button/style/index.css'
 import 'antd/es/message/style/index.css'; //imports css for message component AND index.css file from ant design.
@@ -38,7 +39,7 @@ class Test extends Component {
 
   // Loads the test if user is authenticated esle redirect to signin screen.
   loadtest = () => {
-    let testRef = firebase.firestore().collection('test').doc('vRR4glYMPlQdk06pcVPB');
+    let testRef = firebase.firestore().collection('test').doc('DlXxshW06CPEFPLnnjyQ');
     testRef.get()
       .then((doc) => {
         console.log(doc.id, '=>', doc.data());
@@ -176,8 +177,7 @@ class Test extends Component {
         {this.state.loading ? <p>Loading..</p> :
           (<React.Fragment>
             <div className={classes.userinfobannerwrapper}>
-              <div className={classes.userimage}>userimage</div>
-              <div className={classes.userdetailsandtime} >user details and time left</div>
+              <div className={classes.examClientLogo}><img src={logo} alt="examer-logo" height="30" /></div>
             </div>
 
             <div className={classes.questionpaperandcontrolswrapper}>
