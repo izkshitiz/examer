@@ -57,7 +57,6 @@ class Test extends Component {
 
   // Invoked by "Save and Next" button.
   // Saves selected answer to the state.
-  // Arguments include selectedOption and currentQuestionIndex
   // Calls "nextQuestion" function in the end.
   saveAnswer = (selectedOption, currentQuestionIndex) => {
     let previousAnswer = this.state.answers[currentQuestionIndex]; // Find ( if any) previous answer user has given to the question.
@@ -94,7 +93,6 @@ class Test extends Component {
 
   // Invoked by "Clear" button.
   // Clears all previous types of answers.
-  // Takes CurrentQuestionIndex as argument.
   clearAnswer = (currentQuestionIndex) => {
     let previousAnswer = this.state.answers[currentQuestionIndex];
     // If there is No previous answer, return.
@@ -114,7 +112,6 @@ class Test extends Component {
 
   // Invoked by "Mark for Review and Next" button.
   // Marks question for reivew by assigning "markfrrevw7" string as an answer to the question.
-  // Takes CurrentQuestionIndex as argument.
   // Calls "nextQuestion" function in the end.
   markForReview = (currentQuestionIndex) => {
     let previousAnswer = this.state.answers[currentQuestionIndex];
@@ -134,7 +131,6 @@ class Test extends Component {
 
   // Invoked by "Next" button.
   // Traverse to the next question and update appropriate counters in the state.
-  // Takes current question index as an argument.
   nextQuestion = (currentQuestionIndex) => {
     if (currentQuestionIndex >= this.state.questions.length - 1) {
       message.warn("This is the last Question !");
@@ -150,7 +146,6 @@ class Test extends Component {
 
   // Invoked by "Previous" button.
   // Traverse to the previous question and update appropriate counters in the state.
-  // Takes current question index as an argument.
   previousQuestion = (currentQuestionIndex) => {
     if (currentQuestionIndex === 0) {
       return;
@@ -165,7 +160,6 @@ class Test extends Component {
 
   // Invoked by clicking on question number in navigation box.
   // Traverse to the selected question and update appropriate counters in the state.
-  // Takes question answer object and question index as an argument.
   questionNavigationClick = (questionAnswerObj, questionIndex) => {
     // Loads question to view by setting question answer object to state and updates current question index. 
     this.setState({ currentQuestion: questionAnswerObj, currentQuestionIndex: questionIndex });
