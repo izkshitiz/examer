@@ -1,68 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+#### Clean Design.
+#### Easy to navigate using navigation box.
+#### Responsive for all screen sizes.
 
-## Available Scripts
+## SCREENSHOT
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## HOW TO USE
+* Clone the repo.
+* Add and initialize your firebase configuration.
+* Create a firestore collection > document > array( Questions answers ) as the one given below.
+* Edit pullTestQuestions function in Test.js file with your own collection and document name.
+* Run npm install in root directory.
+* Run npm start.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## FIRESTORE DATA MODEL
 
-### `npm test`
+Collection>Document>Array(as given below)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+exam:[
+0: {answer2: "United States Of America", answer1: "Russia", answer3: "United Kingdom", question: "Which was the first country to launch Artificial satellite in the space?", answer4: "Germany"}
+1: {answer4: "Vatican City", answer2: "Monaco", answer1: "Singapore", question: "What is the smallest country in the world?", answer3: "Liechtenstein"}
+2: {question: "Which is the highest mountain peak in the world?", answer2: "Mount Fiji", answer3: "Mount Everest", answer1: "Alps", answer4: "K2"}
+3: {answer1: "Sparrow", question: "Which is the smallest bird in the world?", answer2: "Humming Bird", answer4: "Canary", answer3: "Finch"}
+4: {answer2: "United States of America", answer3: "United Kingdom", question: "Which is the first country to host the modern Olympics ?", answer4: "Ireland", answer1: "Greece"}
+5: {answer1: "North America", answer2: "Europe", answer4: "Asia", answer3: "Australia", question: "Which is the smallest continent in the world?"}
+6: {answer4: "Blue Whale", answer1: "Manatee", answer2: "Killer Whale", answer3: "Seal", question: "Which is the world’s biggest sea animal?"}
+7: {answer3: "India", answer2: "Russia", answer1: "China", question: "Which was the first country to send man to the moon?", answer4: "United States of America"}
+8: {answer4: "China", question: "Which is the first country to print book?", answer3: "India", answer1: "France", answer2: "United Kingdom"}
+9: {answer1: "Empire State Building", answer2: "Burj Khalifa", answer3: "Shanghai Tower", answer4: "Taipei 101", question: "Tallest building in the world as of now?"}
+]
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
