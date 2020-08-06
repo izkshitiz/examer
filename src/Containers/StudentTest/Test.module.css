@@ -1,3 +1,8 @@
+.Spinner{
+margin:0 auto;
+color:#1890ff;
+}
+
 .contentwrapper{
     display: grid;
     align-self: center;

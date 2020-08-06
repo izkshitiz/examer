@@ -12,6 +12,7 @@
 /build
 
 #Firebase
+/src/Firebase
 /.firebase
 .firebaserc
 firebase.json
