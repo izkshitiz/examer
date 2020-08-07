@@ -5,9 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  //<React.StrictMode> https://github.com/ant-design/ant-design/issues/22493  Ant design gives warning when used with strict mode. uncomment if not using antd, issue has been resolved or warning in console is no bother to you. 
     <App />
-  </React.StrictMode>,
+  //</React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 

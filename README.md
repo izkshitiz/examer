@@ -1,4 +1,3 @@
-
 ## Features
 #### Clean Design.
 #### Easy to navigate using navigation box.
@@ -6,7 +5,7 @@
 
 ## SCREENSHOT
 
-
+![Screengrab of website](https://raw.githubusercontent.com/izkshitiz/examer/master/src/assets/screen%20examer%20client.gif)
 
 ## HOW TO USE
 * Clone the repo.

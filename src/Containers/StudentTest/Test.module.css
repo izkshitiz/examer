@@ -1,4 +1,4 @@
-.Spinner{
+.spinner{
 margin:0 auto;
 color:#1890ff;
 }
@@ -10,7 +10,7 @@ color:#1890ff;
     grid-template-rows:auto;
     
 }
-.userinfobannerwrapper{
+.navigationwrapper{
     grid-column: auto/span 16;
     display: flex;
     background-color: white;
@@ -132,15 +132,3 @@ input{
         grid-column: 2/span 14;
     }
 }
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-/* @media only screen and (min-width: 600px) {...} */
-
-/* Medium devices (landscape tablets, 768px and up) */
-/* @media only screen and (min-width: 768px) {...} */
-
-/* Large devices (laptops/desktops, 992px and up) */
-/* @media only screen and (min-width: 992px) {...} */
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-/* @media only screen and (min-width: 1200px) {...} */

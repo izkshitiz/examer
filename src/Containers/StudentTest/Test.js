@@ -6,7 +6,7 @@ import 'firebase/firestore'
 import { message } from 'antd';
 import { Button } from 'antd';
 import { Spin } from 'antd';
-import {LoadingOutlined,RightSquareOutlined,HistoryOutlined,UndoOutlined,RightOutlined,LeftOutlined,SaveOutlined} from '@ant-design/icons';
+import { LoadingOutlined, RightSquareOutlined, HistoryOutlined, UndoOutlined, RightOutlined, LeftOutlined, SaveOutlined } from '@ant-design/icons';
 import 'antd/es/button/style/index.css';
 import 'antd/es/message/style/index.css';
 import logo from '../../assets/logo.png';
@@ -23,9 +23,9 @@ class Test extends Component {
     currentQuestion: { answer1: 'loading', answer2: 'loading', answer3: 'laoding', answer4: 'loading', question: 'loading' },
     selectedOption: "",
     questionNotAnsweredCounter: 0,
-    questionAnsweredCounter: 0,   
-    questionInReivewCounter: 0,   
-    questionNotVisitedCounter: 0,  
+    questionAnsweredCounter: 0,
+    questionInReivewCounter: 0,
+    questionNotVisitedCounter: 0,
   }
 
 
@@ -39,16 +39,15 @@ class Test extends Component {
     let testRef = firebase.firestore().collection('test').doc('DlXxshW06CPEFPLnnjyQ');
     testRef.get()
       .then((doc) => {
-        console.log(doc.id, '=>', doc.data());
-        let l = doc.data().paper.length;
-        this.setState({ questions: doc.data().paper, currentQuestion: doc.data().paper[0], questionNotAnsweredCounter: l, questionNotVisitedCounter: l - 1, loading: false });
+        let length = doc.data().paper.length;
+        this.setState({ questions: doc.data().paper, currentQuestion: doc.data().paper[0], questionNotAnsweredCounter: length, questionNotVisitedCounter: length - 1, loading: false });
       })
       .catch(err => {
         console.log('Error getting question paper', err);
       });
   }
 
-  // Answer select or change options handler.
+  // Answer select/change options handler.
   answerSelectHandler = changeEvent => {
     this.setState({
       selectedOption: changeEvent.target.value
@@ -176,9 +175,9 @@ class Test extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.loading ? <Spin className={classes.Spinner} indicator={loadingIcon}/> :
+        {this.state.loading ? <Spin className={classes.spinner} indicator={loadingIcon} /> :
           (<div className={classes.contentwrapper}>
-            <div className={classes.userinfobannerwrapper}>
+            <div className={classes.navigationwrapper}>
               <div className={classes.examClientLogo}><img src={logo} alt="examer-logo" height="30" /></div>
             </div>
 
@@ -241,14 +240,13 @@ class Test extends Component {
                   <Button type="primary" icon={<HistoryOutlined />} size="small" onClick={() => this.markForReview(this.state.currentQuestionIndex)}>Mark For Review and Next</Button>
                 </div>
                 <div className={classes.questionpapercontrolsrowtwo}>
-                  <Button type="primary" icon={<LeftOutlined />} size="small" disabled={this.state.currentQuestionIndex === 0} onClick={()=>this.previousQuestion(this.state.currentQuestionIndex)}>Previous</Button>
+                  <Button type="primary" icon={<LeftOutlined />} size="small" disabled={this.state.currentQuestionIndex === 0} onClick={() => this.previousQuestion(this.state.currentQuestionIndex)}>Previous</Button>
                   <Button type="primary" icon={<RightOutlined />} size="small" disabled={this.state.currentQuestionIndex === this.state.questions.length - 1} onClick={() => this.nextQuestion(this.state.currentQuestionIndex)}>Next</Button>
                   <Button type="primary" icon={<SaveOutlined />} size="small" >Submit</Button>
                 </div>
               </div>
             </div>
 
-            {/* Keep track of elements in the answers object*/}
             <div className={classes.questionanswerinformationwrapper}>
               <div className={classes.questionanswercount}>
                 <div className={classes.aligncenter}>
